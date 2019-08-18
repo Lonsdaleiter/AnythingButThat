@@ -4,7 +4,7 @@ My remake of Anything But That, a Proof production.
 
 ## Version Info
 
-Version 0.0.1
+Version 0.0.2
 
 The first version number denotes release, second update, third commit.
 
