@@ -70,7 +70,7 @@ class Missile(Projectile):
 
     def __init__(self, x, y, downwards):
         super().__init__(x, y, assets.upmissile if not downwards else assets.downmissile,
-                         0, 2 if downwards else -2, 1, 1, downwards)
+                         0, 3 if downwards else -3, 1, 1, downwards)
 
     def on_collide(self, other_entity):
         if type(other_entity) != entity.ConcreteEntity and (not issubclass(type(other_entity), Explosion)
@@ -98,7 +98,7 @@ class Mine(Projectile):
 
         self.time += 1
         if self.time < self.cap:
-            self.move(0, -2)
+            self.move(0, -1)
 
     def on_collide(self, other_entity):
         if self.time > self.cap and \
@@ -190,3 +190,64 @@ class Laser(Projectile):  # a weapon which shoots straight instantly through shi
 
     def get_max_num_on_screen(self):
         return 1
+
+
+class PlasmaCloud(Projectile):
+
+    def __init__(self, x, y, downwards):
+        super().__init__(x, y - 40, assets.plasma, 0, 0, float("inf"), 0, downwards)
+
+        self.count = 0
+
+    def update(self):
+        super().update()
+
+        if self.count < 100:
+            self.move(0, (1 if self.downwards else -1) * 2)
+        self.count += 1
+
+        if self.count > 500:
+            self.kill()
+
+    def on_collide(self, other_entity):
+        super().on_collide(other_entity)
+        if random.randint(0, 50) == 0:
+            other_entity.health -= 1
+
+    def get_max_num_on_screen(self):
+        return 2
+
+
+class DestructoBullet(Projectile):
+
+    def __init__(self, x, y, downwards):
+        super().__init__(x, y - 5, assets.destructo_bullet, 0, 2 if downwards else -2, float("inf"), 0, downwards)
+
+    def on_collide(self, other_entity):
+        if type(other_entity) != entity.ConcreteEntity and not issubclass(type(other_entity), Projectile):
+            DestructoReaction(self.x, self.y)
+            self.kill()
+
+    def get_max_num_on_screen(self):
+        return 1
+
+
+class DestructoReaction(Projectile):
+
+    def __init__(self, x, y):
+        super().__init__(x, y, assets.destructo_reaction, 0, 0, float("inf"), 0, False)
+
+        self.count = 0
+
+    def on_collide(self, other_entity):
+        if type(other_entity) != entity.ConcreteEntity and type(other_entity) != DestructoReaction:
+            DestructoReaction(other_entity.x, other_entity.y)
+            other_entity.kill()
+            self.kill()
+
+        if self.count > 200:
+            self.kill()
+        self.count += 1
+
+    def get_max_num_on_screen(self):
+        return float("inf")

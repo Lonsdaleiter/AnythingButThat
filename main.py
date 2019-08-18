@@ -7,6 +7,7 @@ import assets
 import scorekeeper
 import player
 import enemy
+import weapon
 
 
 running = False
@@ -17,8 +18,10 @@ score_text = None
 health_text = None
 small_text = None
 lost = False
-paused = False
 count = 0
+in_store = False
+potential_purchases = []
+purchase_count = 0
 
 
 def init():
@@ -52,8 +55,10 @@ def update():
     global score_text
     global health_text
     global lost
-    global paused
+    global in_store
+    global potential_purchases
     global count
+    global purchase_count
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -64,11 +69,44 @@ def update():
     keyboard.update()
 
     count += 1
-    if keyboard.is_key_down(pygame.K_p) and count > 30:
-        paused = not paused
+    if keyboard.is_key_down(pygame.K_s) and count > 30 and not lost:
         count = 0
+        in_store = not in_store
 
-    if paused:
+    if in_store:
+        alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+        key_linker = {"a": pygame.K_a, "b": pygame.K_b, "c": pygame.K_c, "d": pygame.K_d, "e": pygame.K_e,
+                      "f": pygame.K_f, "g": pygame.K_g, "h": pygame.K_h, "i": pygame.K_i, "j": pygame.K_j,
+                      "k": pygame.K_k}
+        potential_purchases = [w for w in weapon.weapons if w not in p.weapons]
+
+        purchase_count += 1
+        if keyboard.is_key_down(pygame.K_z) and p.health < 42 and scorekeeper.points >= 10 and purchase_count > 30:
+            # purchase health
+            p.health += 3
+            scorekeeper.points -= 10
+            if p.health > 42:
+                p.health = 42
+            purchase_count = 0
+
+        cthing = 0
+        window.blit(assets.background_image, (0, 0))
+        tiny_text = pygame.font.Font("freesansbold.ttf", 24)
+
+        for purchase in potential_purchases:
+            if keyboard.is_key_down(key_linker[alphabet[cthing]]) \
+                    and scorekeeper.points >= purchase.cost and purchase_count > 30:
+                p.weapons.append(purchase)
+
+            img = tiny_text.render("Press " + alphabet[cthing] + " to purchase " + purchase.name + " for " +
+                                   str(purchase.cost) + " points", False, (0, 255, 0)
+                                   if purchase.cost <= scorekeeper.points else (255, 0, 0))
+            window.blit(img, (0, cthing * 40))
+            cthing += 1
+        img = tiny_text.render("Press z to repair by 3 health for 10 points",
+                               False, ((0, 255, 0) if scorekeeper.points > 10 else (255, 0, 0)))
+        window.blit(img, (0, cthing * 40))
+        pygame.display.flip()
         return
 
     entitymanager.update(window)
@@ -98,7 +136,7 @@ def update():
         image = large_text.render("YOU LOSE", False, (255, 0, 0))
         entity.ConcreteEntity(image, config.WIDTH / 2 - image.get_width() / 2,
                               config.HEIGHT / 2 - image.get_height() / 2, float("inf"))
-        otherthing = small_text.render("Press R to retry", False, (255, 0, 0))
+        otherthing = small_text.render("Press R to retry", False, (0, 0, 255))
         entity.ConcreteEntity(otherthing, config.WIDTH / 2 - otherthing.get_width() / 2,
                               config.HEIGHT / 2 - otherthing.get_height() / 2 + 70, float("inf"))
 
@@ -112,7 +150,7 @@ def update():
         last_thing = small_text.render("You got a HIGHSCORE of: " + str(scorekeeper.points) + "."
                                        if scorekeeper.points > biggest else "Highscore is " + str(biggest) +
                                        "; you did not beat it.",
-                                       False, (255, 0, 0))
+                                       False, (0, 0, 255))
         entity.ConcreteEntity(last_thing, config.WIDTH / 2 - last_thing.get_width() / 2,
                               config.HEIGHT / 2 - last_thing.get_height() / 2 + 110, float("inf"))
 
@@ -130,6 +168,7 @@ def update():
 
 def close():
     pygame.quit()
+    exit(0)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ To switch weapons, press e.
 
 To pause and unpause, press p.
 
+To buy weapons and repairs, press s. To exit that screen, press s again.
+
 Don't die.
 
 To quit, press escape.
