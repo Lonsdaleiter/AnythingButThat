@@ -5,9 +5,11 @@ To shoot, press space.
 
 To switch weapons, press e.
 
+To pause and unpause, press p.
+
 Don't die.
 
-If you want to quit, press escape.
+To quit, press escape.
 
 Oh yeah, and if you do die and defy my instructions,
-press r.
+press r to play again.

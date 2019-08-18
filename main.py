@@ -17,6 +17,8 @@ score_text = None
 health_text = None
 small_text = None
 lost = False
+paused = False
+count = 0
 
 
 def init():
@@ -50,6 +52,8 @@ def update():
     global score_text
     global health_text
     global lost
+    global paused
+    global count
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -58,12 +62,22 @@ def update():
     clock.tick(config.FPS)
 
     keyboard.update()
+
+    count += 1
+    if keyboard.is_key_down(pygame.K_p) and count > 30:
+        paused = not paused
+        count = 0
+
+    if paused:
+        return
+
     entitymanager.update(window)
 
     enemy.update()
 
     if lost and keyboard.is_key_down(pygame.K_r):
         entitymanager.entities = []
+        lost = False
         init()
         scorekeeper.points = 0
 

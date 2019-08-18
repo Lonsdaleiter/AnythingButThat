@@ -104,7 +104,9 @@ class Mine(Projectile):
         if self.time > self.cap and \
                         type(other_entity) != DestructiveExplosion and \
                         type(other_entity) != entity.ConcreteEntity and \
-                not self.exploded:
+                        type(other_entity) != Explosion and \
+                        not issubclass(type(other_entity), Projectile) and\
+                        not self.exploded:
             DestructiveExplosion(self.x, self.y)
             self.exploded = True
 

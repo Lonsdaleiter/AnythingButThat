@@ -49,7 +49,8 @@ class Enemy(entity.Entity):
             projectiles.Bullet(self.x + self.image.get_width() / 2, self.y + self.image.get_height(), True)
 
     def on_collide(self, other_entity):
-        self.health -= other_entity.damage
-        if self.health <= 0 and issubclass(type(other_entity), projectiles.Projectile) and not other_entity.downwards:
+        if issubclass(type(other_entity), projectiles.Projectile) and not other_entity.downwards:
+            self.health -= other_entity.damage
+        if self.health <= 0:
             self.kill()
             scorekeeper.points += 1
