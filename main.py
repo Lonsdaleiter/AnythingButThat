@@ -50,6 +50,8 @@ def init():
 
     small_text = pygame.font.Font("freesansbold.ttf", 36)
 
+    scorekeeper.cumulated = 0
+
 
 def update():
     global running
@@ -161,7 +163,7 @@ def update():
         highscores.close()
 
         new_file = open(os.path.join(__location__, "scores.dat"), "a")
-        new_file.write(";" + str(scorekeeper.points))
+        new_file.write(";" + str(scorekeeper.cumulated))
 
         p = None
         lost = True
