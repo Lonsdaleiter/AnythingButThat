@@ -174,7 +174,7 @@ class Laser(Projectile):  # a weapon which shoots straight instantly through shi
     def update(self):
         super().update()
 
-        if self.count > 500:
+        if self.count > 200:
             self.kill()
         if self.count > 50:
             self.visible = False

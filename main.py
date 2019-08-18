@@ -62,6 +62,11 @@ def update():
 
     enemy.update()
 
+    if lost and keyboard.is_key_down(pygame.K_r):
+        entitymanager.entities = []
+        init()
+        scorekeeper.points = 0
+
     image2 = small_text.render("Points: " + str(scorekeeper.points), False, (255, 0, 0))
     if score_text is not None:
         score_text.kill()
@@ -79,6 +84,29 @@ def update():
         image = large_text.render("YOU LOSE", False, (255, 0, 0))
         entity.ConcreteEntity(image, config.WIDTH / 2 - image.get_width() / 2,
                               config.HEIGHT / 2 - image.get_height() / 2, float("inf"))
+        otherthing = small_text.render("Press R to retry", False, (255, 0, 0))
+        entity.ConcreteEntity(otherthing, config.WIDTH / 2 - otherthing.get_width() / 2,
+                              config.HEIGHT / 2 - otherthing.get_height() / 2 + 70, float("inf"))
+
+        highscores = open("scores.dat")
+        scores = highscores.read().split(";")
+        biggest = 0
+        for sc in scores:
+            if int(sc) > biggest:
+                biggest = int(sc)
+
+        last_thing = small_text.render("You got a HIGHSCORE of: " + str(scorekeeper.points) + "."
+                                       if scorekeeper.points > biggest else "Highscore is " + str(biggest) +
+                                       "; you did not beat it.",
+                                       False, (255, 0, 0))
+        entity.ConcreteEntity(last_thing, config.WIDTH / 2 - last_thing.get_width() / 2,
+                              config.HEIGHT / 2 - last_thing.get_height() / 2 + 110, float("inf"))
+
+        highscores.close()
+
+        new_file = open("scores.dat", "a")
+        new_file.write(";" + str(scorekeeper.points))
+
         p = None
         lost = True
 
