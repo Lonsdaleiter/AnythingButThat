@@ -151,8 +151,8 @@ def update():
             if int(sc) > biggest:
                 biggest = int(sc)
 
-        last_thing = small_text.render("You got a HIGHSCORE of: " + str(scorekeeper.points) + "."
-                                       if scorekeeper.points > biggest else "Highscore is " + str(biggest) +
+        last_thing = small_text.render("You got a HIGHSCORE of: " + str(scorekeeper.cumulated) + "."
+                                       if scorekeeper.cumulated > biggest else "Highscore is " + str(biggest) +
                                        "; you did not beat it.",
                                        False, (0, 0, 255))
         entity.ConcreteEntity(last_thing, config.WIDTH / 2 - last_thing.get_width() / 2,

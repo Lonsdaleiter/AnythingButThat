@@ -4,7 +4,7 @@ My remake of Anything But That, a Proof production.
 
 ## Version Info
 
-Version 0.1.2
+Version 0.1.3
 
 The first version number denotes release, second update, third commit.
 
@@ -14,4 +14,4 @@ The first release of ABT.
 
 ## Latest Commit Info
 
-- Updated the tutorial.
+- Fixed the points system.

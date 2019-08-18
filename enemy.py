@@ -54,3 +54,4 @@ class Enemy(entity.Entity):
         if self.health <= 0:
             self.kill()
             scorekeeper.points += 1
+            scorekeeper.cumulated += 1

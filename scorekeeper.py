@@ -2,3 +2,4 @@
 
 
 points = 0
+cumulated = 0
