@@ -6,8 +6,12 @@ import entitymanager
 import assets
 import scorekeeper
 import player
+import os
 import enemy
 import weapon
+
+
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
 running = False
@@ -140,7 +144,7 @@ def update():
         entity.ConcreteEntity(otherthing, config.WIDTH / 2 - otherthing.get_width() / 2,
                               config.HEIGHT / 2 - otherthing.get_height() / 2 + 70, float("inf"))
 
-        highscores = open("scores.dat")
+        highscores = open(os.path.join(__location__, "scores.dat"))
         scores = highscores.read().split(";")
         biggest = 0
         for sc in scores:
@@ -156,7 +160,7 @@ def update():
 
         highscores.close()
 
-        new_file = open("scores.dat", "a")
+        new_file = open(os.path.join(__location__, "scores.dat"), "a")
         new_file.write(";" + str(scorekeeper.points))
 
         p = None

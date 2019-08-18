@@ -1,8 +1,12 @@
 import pygame
+import os
+
+
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
 def load_image(path):
-    return pygame.image.load("res/textures/" + path + ".png")
+    return pygame.image.load(os.path.join(__location__, "res/textures/" + path + ".png"))
 
 
 def scale_image(image, x, y):
