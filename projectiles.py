@@ -81,7 +81,7 @@ class Missile(Projectile):
             super().on_collide(other_entity)
 
     def get_max_num_on_screen(self):
-        return 5
+        return 3
 
 
 class Mine(Projectile):
@@ -112,7 +112,7 @@ class Mine(Projectile):
             self.kill()
 
     def get_max_num_on_screen(self):
-        return 2
+        return 5
 
 
 class IonBall(Explosion):
@@ -161,3 +161,30 @@ class Ion(Projectile):
 
     def get_max_num_on_screen(self):
         return 2
+
+
+class Laser(Projectile):  # a weapon which shoots straight instantly through ships to the top of the screen and deals 1d
+
+    def __init__(self, x, y):
+        super().__init__(x, y - assets.laser.get_height(), assets.laser, 0, 0, float("inf"), 1, False)
+
+        self.damaged_entities = []
+        self.count = 0
+
+    def update(self):
+        super().update()
+
+        if self.count > 500:
+            self.kill()
+        if self.count > 50:
+            self.visible = False
+
+        self.count += 1
+
+    def on_collide(self, other_entity):
+        if other_entity not in self.damaged_entities and type(other_entity) != entity.ConcreteEntity:
+            self.damaged_entities.append(other_entity)
+            other_entity.health -= self.damage
+
+    def get_max_num_on_screen(self):
+        return 1

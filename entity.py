@@ -23,6 +23,8 @@ class Entity(pygame.sprite.Sprite):
 
         self.can_move = True
 
+        self.visible = True
+
         entitymanager.entities.append(self)
 
     def move(self, dx, dy):

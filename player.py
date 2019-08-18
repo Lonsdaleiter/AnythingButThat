@@ -16,7 +16,9 @@ class Player(entity.Entity):
         self.time_since_last_fire = 0
 
         self.projs = []
-        self.weapons = [weapon.Gun(), weapon.MissileLauncher(), weapon.IonLauncher(), weapon.MineLauncher()]
+        self.weapons = [weapon.Gun(), weapon.MissileLauncher(),
+                        weapon.IonLauncher(), weapon.MineLauncher(),
+                        weapon.LaserLauncher()]
         self.current_weapon = 0
 
         self.count = 0

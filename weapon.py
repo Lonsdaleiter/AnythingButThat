@@ -44,3 +44,12 @@ class MineLauncher(Weapon):
 
     def shoot(self, x, y):
         return projectiles.Mine(x, y, False)
+
+
+class LaserLauncher(Weapon):
+
+    def get_weapon(self):
+        return projectiles.Laser
+
+    def shoot(self, x, y):
+        return projectiles.Laser(x, y)
