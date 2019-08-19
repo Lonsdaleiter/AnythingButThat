@@ -16,7 +16,7 @@ def m(num):
     global last_music
 
     last_music = num
-    pygame.mixer.music.load("res/sounds/music/music" + str(num) + ".wav")
+    pygame.mixer.music.load(os.path.join(__location__, "res/sounds/music/music" + str(num) + ".wav"))
     pygame.mixer.music.play()
 
 

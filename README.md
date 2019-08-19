@@ -4,7 +4,7 @@ My remake of Anything But That, a Proof production.
 
 ## Version Info
 
-Version 0.2.5
+Version 0.2.6
 
 The first version number denotes release, second update, third commit.
 
@@ -14,4 +14,4 @@ The second major update in the alpha phase of ABT.
 
 ## Latest Commit Info
 
-- Made enemies have a chance at firing missiles rather than bullets that steadily increases.
+- Fixed a game breaking bug.
