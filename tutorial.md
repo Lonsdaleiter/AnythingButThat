@@ -15,5 +15,9 @@ Don't die.
 
 To quit, press escape.
 
+If you find the sound effects obnoxious or want to mess with the config
+settings, open the config.py file in TextEdit and follow the instructions
+in the file.
+
 Oh yeah, and if you do die and defy my instructions,
 press r to play again.
