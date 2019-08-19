@@ -16,12 +16,13 @@ class Player(entity.Entity):
         self.time_since_last_fire = 0
 
         self.projs = []
-        self.weapons = [weapon.weapons[0]]
+        self.weapons = [weapon.weapons[0], weapon.weapons[1], weapon.weapons[2], weapon.weapons[3],
+                        weapon.weapons[4], weapon.weapons[5], weapon.weapons[6]]
         self.current_weapon = 0
 
         self.count = 0
 
-    def kill(self):
+    def kill(self, player_launched=False):
         super().kill()
         projectiles.Explosion(self.x + self.image.get_width() / 2, self.y + self.image.get_height() / 2)
 

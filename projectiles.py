@@ -3,6 +3,7 @@ import assets
 import random
 import entitymanager
 import config
+import sound_player
 
 
 class Projectile(entity.Entity):
@@ -34,6 +35,7 @@ class Explosion(Projectile):
     def __init__(self, x, y, damage=0, image=assets.explosion):
         super().__init__(x, y, image, 0, 0, float("inf"), damage, False)
         self.count = 0
+        sound_player.play_sound("explosion")
 
     def update(self):
         # super().update()
@@ -71,6 +73,7 @@ class Missile(Projectile):
     def __init__(self, x, y, downwards):
         super().__init__(x, y, assets.upmissile if not downwards else assets.downmissile,
                          0, 3 if downwards else -3, 1, 1, downwards)
+        sound_player.play_sound("missilelaunching")
 
     def on_collide(self, other_entity):
         if type(other_entity) != entity.ConcreteEntity and (not issubclass(type(other_entity), Explosion)
@@ -92,6 +95,8 @@ class Mine(Projectile):
         self.time = 0
         self.cap = 100 + random.randint(0, 100)
         self.exploded = False
+
+        sound_player.play_sound("minelaunching")
 
     def update(self):
         super().update()
@@ -121,6 +126,7 @@ class IonBall(Explosion):
 
     def __init__(self, x, y):
         super().__init__(x, y, 0, image=assets.ion_ball)
+        sound_player.play_sound("zap")
 
         entity.ions.append(self)
 
@@ -155,7 +161,8 @@ class Ion(Projectile):
 
     def on_collide(self, other_entity):
         if other_entity not in self.collision_registry and type(other_entity) != IonBall\
-                and type(other_entity) != entity.ConcreteEntity:
+                and type(other_entity) != entity.ConcreteEntity and type(other_entity) != Explosion\
+                and type(other_entity) != DestructiveExplosion:
             self.collision_registry.append(other_entity)
             IonBall(self.x, self.y - 40)
 
@@ -169,6 +176,8 @@ class Laser(Projectile):  # a weapon which shoots straight instantly through shi
 
     def __init__(self, x, y):
         super().__init__(x, y - assets.laser.get_height(), assets.laser, 0, 0, float("inf"), 1, False)
+
+        sound_player.play_sound("zap")
 
         self.damaged_entities = []
         self.count = 0
@@ -196,6 +205,8 @@ class PlasmaCloud(Projectile):
 
     def __init__(self, x, y, downwards):
         super().__init__(x, y - 40, assets.plasma, 0, 0, float("inf"), 0, downwards)
+
+        sound_player.play_sound("plasma")
 
         self.count = 0
 
@@ -237,12 +248,15 @@ class DestructoReaction(Projectile):
     def __init__(self, x, y):
         super().__init__(x, y, assets.destructo_reaction, 0, 0, float("inf"), 0, False)
 
+        sound_player.play_sound("explosion")
+
         self.count = 0
 
     def on_collide(self, other_entity):
         if type(other_entity) != entity.ConcreteEntity and type(other_entity) != DestructoReaction:
-            DestructoReaction(other_entity.x, other_entity.y)
-            other_entity.kill()
+            DestructoReaction(other_entity.x - other_entity.image.get_width() / 2,
+                              other_entity.y - other_entity.image.get_height() / 2)
+            other_entity.kill(True)
             self.kill()
 
         if self.count > 200:

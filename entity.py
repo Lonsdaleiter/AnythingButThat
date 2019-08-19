@@ -40,7 +40,7 @@ class Entity(pygame.sprite.Sprite):
 
         self.rect = pygame.Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
 
-    def kill(self):
+    def kill(self, player_launched=False):
         if self in entitymanager.entities:
             entitymanager.entities.remove(self)
 

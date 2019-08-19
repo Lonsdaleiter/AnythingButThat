@@ -4,6 +4,7 @@ import keyboard
 import entity
 import entitymanager
 import assets
+import sound_player
 import scorekeeper
 import player
 import os
@@ -52,6 +53,8 @@ def init():
 
     scorekeeper.cumulated = 0
 
+    sound_player.init()
+
 
 def update():
     global running
@@ -69,6 +72,8 @@ def update():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.USEREVENT + 1:
+            sound_player.currentlyplaying -= 1
 
     clock.tick(config.FPS)
 

@@ -31,8 +31,11 @@ class Enemy(entity.Entity):
         self.bullet_chance = 60
         self.count = 0
 
-    def kill(self):
+    def kill(self, player_launched=False):
         super().kill()
+        if player_launched:
+            scorekeeper.points += 1
+            scorekeeper.cumulated += 1
         if self in enemies:
             enemies.remove(self)
             projectiles.Explosion(self.x + self.image.get_width() / 2, self.y + self.image.get_height() / 2)
@@ -52,6 +55,4 @@ class Enemy(entity.Entity):
         if issubclass(type(other_entity), projectiles.Projectile) and not other_entity.downwards:
             self.health -= other_entity.damage
         if self.health <= 0:
-            self.kill()
-            scorekeeper.points += 1
-            scorekeeper.cumulated += 1
+            self.kill(player_launched=True)
