@@ -11,6 +11,7 @@
 
 ### Music and Sound:
 - Lonsdaleiter
+- other people who made stuff on freesound.org
 
 ### Writers:
 - Lonsdaleiter
