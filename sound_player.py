@@ -26,9 +26,9 @@ def music():
     if not config.MUSIC_ON:
         return
 
-    k = random.randint(0, 6)
+    k = random.randint(1, 6)
     while k == last_music:
-        k = random.randint(0, 6)
+        k = random.randint(1, 6)
     m(k)
 
 
