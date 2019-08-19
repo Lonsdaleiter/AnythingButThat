@@ -103,6 +103,8 @@ def update():
             if keyboard.is_key_down(key_linker[alphabet[cthing]]) \
                     and scorekeeper.points >= purchase.cost and purchase_count > 30:
                 p.weapons.append(purchase)
+                scorekeeper.points -= purchase.cost
+                purchase_count = 0
 
             img = tiny_text.render("Press " + alphabet[cthing] + " to purchase " + purchase.name + " for " +
                                    str(purchase.cost) + " points", False, (0, 255, 0)

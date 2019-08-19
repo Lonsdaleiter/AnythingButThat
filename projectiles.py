@@ -206,12 +206,12 @@ class PlasmaCloud(Projectile):
             self.move(0, (1 if self.downwards else -1) * 2)
         self.count += 1
 
-        if self.count > 500:
+        if self.count > 520:
             self.kill()
 
     def on_collide(self, other_entity):
         super().on_collide(other_entity)
-        if random.randint(0, 50) == 0:
+        if random.randint(0, 20) == 0:
             other_entity.health -= 1
 
     def get_max_num_on_screen(self):
