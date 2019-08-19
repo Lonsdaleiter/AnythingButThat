@@ -4,7 +4,7 @@ My remake of Anything But That, a Proof production.
 
 ## Version Info
 
-Version 0.2.0
+Version 0.2.1
 
 The first version number denotes release, second update, third commit.
 
@@ -14,7 +14,4 @@ The second major update in the alpha phase of ABT.
 
 ## Latest Commit Info
 
-- Added sound effects
-- Fixed the destructo reaction
-- Fixed the ion hitting explosions
-- Fixed some minor bugs
+- Fixed a game breaking bug and added a config option for playing sounds.

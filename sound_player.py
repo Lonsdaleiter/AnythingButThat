@@ -1,5 +1,6 @@
 import pygame
 import os
+import config
 
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -14,6 +15,9 @@ def init():
 
 def play_sound(sound, extension=".wav"):
     global currentlyplaying
+
+    if not config.SOUND_ON:
+        return
 
     if currentlyplaying > 298:
         print("too many sounds")
