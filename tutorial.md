@@ -1,4 +1,6 @@
 # Tutorial
+MAKE SURE YOU HAVE BOTH PYTHON AND PYGAME INSTALLED!
+
 To run the program, double click the "init" file. Make sure python is installed.
 
 To move, use the left and right arrow keys.
