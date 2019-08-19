@@ -9,9 +9,9 @@ To shoot, press space.
 
 To switch weapons, press e.
 
-To pause and unpause, press p.
-
-To buy weapons and repairs, press s. To exit that screen, press s again.
+To buy weapons and repairs, press s. To exit that screen, press s again. It
+will pause the game, so use that as a pause window if you need to
+pause the game.
 
 Don't die.
 
