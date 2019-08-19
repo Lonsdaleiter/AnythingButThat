@@ -54,6 +54,9 @@ def init():
     scorekeeper.cumulated = 0
 
     sound_player.init()
+    sound_player.music()
+
+    pygame.mixer.music.set_endevent(pygame.USEREVENT + 1)
 
 
 def update():
@@ -72,6 +75,8 @@ def update():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.USEREVENT + 1:
+            sound_player.music()
 
     clock.tick(config.FPS)
 

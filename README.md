@@ -4,7 +4,7 @@ My remake of Anything But That, a Proof production.
 
 ## Version Info
 
-Version 0.2.3
+Version 0.2.4
 
 The first version number denotes release, second update, third commit.
 
@@ -14,4 +14,4 @@ The second major update in the alpha phase of ABT.
 
 ## Latest Commit Info
 
-- Fixed an annoying sound bug.
+- Added music.
