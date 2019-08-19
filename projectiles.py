@@ -64,6 +64,8 @@ class Bullet(Projectile):
         super().__init__(x, y, assets.upbullet if not downwards else assets.downbullet,
                          0, 2 if downwards else -2, 1, 3, downwards)
 
+        sound_player.play_sound("pew")
+
     def get_max_num_on_screen(self):
         return 12
 

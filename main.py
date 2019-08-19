@@ -72,8 +72,6 @@ def update():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.USEREVENT + 1:
-            sound_player.currentlyplaying -= 1
 
     clock.tick(config.FPS)
 

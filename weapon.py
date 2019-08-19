@@ -24,8 +24,6 @@ class Gun(Weapon):
         return projectiles.Bullet
 
     def shoot(self, x, y):
-        sound_player.play_sound("pew")
-
         return projectiles.Bullet(x, y, False)
 
 
