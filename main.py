@@ -6,6 +6,7 @@ import entitymanager
 import assets
 import sound_player
 import scorekeeper
+import random
 import player
 import os
 import enemy
@@ -134,6 +135,9 @@ def update():
         lost = False
         init()
         scorekeeper.points = 0
+
+    if enemy.Enemy.bullet_type_change > 60 and random.randint(0, 300) == 0:
+        enemy.Enemy.bullet_type_change -= 1
 
     image2 = small_text.render("Points: " + str(scorekeeper.points), False, (255, 0, 0))
     if score_text is not None:

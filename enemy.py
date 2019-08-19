@@ -23,6 +23,8 @@ def update():
 
 class Enemy(entity.Entity):
 
+    bullet_type_change = 90  # 90% chance for bullets at the start
+
     def __init__(self, x, y, health):
         super().__init__(assets.enemy_spaceship, x, y, health, 100)
 
@@ -30,6 +32,8 @@ class Enemy(entity.Entity):
 
         self.bullet_chance = 60
         self.count = 0
+
+        self.launches_missile = random.randint(0, 100) > Enemy.bullet_type_change  # True if missile, False if bullet
 
     def kill(self, player_launched=False):
         super().kill()
@@ -49,7 +53,10 @@ class Enemy(entity.Entity):
 
         if random.randint(0, self.bullet_chance) == 0 and self.count > 120:
             self.count = 0
-            projectiles.Bullet(self.x + self.image.get_width() / 2, self.y + self.image.get_height(), True)
+            if self.launches_missile:
+                projectiles.Missile(self.x + self.image.get_width() / 2, self.y + self.image.get_height(), True)
+            else:
+                projectiles.Bullet(self.x + self.image.get_width() / 2, self.y + self.image.get_height(), True)
 
     def on_collide(self, other_entity):
         if issubclass(type(other_entity), projectiles.Projectile) and not other_entity.downwards:
