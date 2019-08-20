@@ -2,6 +2,8 @@
 
 My remake of Anything But That, a Proof production.
 
+READ THE TUTORIAL!!!!!!!
+
 ## Version Info
 
 Version 0.2.8
