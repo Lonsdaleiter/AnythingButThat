@@ -80,6 +80,7 @@ class Missile(Projectile):
     def on_collide(self, other_entity):
         if type(other_entity) != entity.ConcreteEntity and (not issubclass(type(other_entity), Explosion)
                                                             and type(other_entity) != Explosion) \
+                and type(other_entity) != DestructoBullet\
                 and self in entitymanager.entities:
             DestructiveExplosion(self.x, self.y)
         if not issubclass(type(other_entity), Explosion) and type(other_entity) != Explosion:
