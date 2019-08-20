@@ -39,6 +39,8 @@ def init():
 
     running = True
 
+    pygame.display.set_icon(assets.abt)
+
     pygame.init()
 
     window = pygame.display.set_mode((config.WIDTH, config.HEIGHT))

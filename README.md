@@ -6,7 +6,7 @@ READ THE TUTORIAL!!!!!!!
 
 ## Version Info
 
-Version 0.2.9
+Version 0.2.10
 
 The first version number denotes release, second update, third commit.
 
@@ -16,4 +16,4 @@ The second major update in the alpha phase of ABT.
 
 ## Latest Commit Info
 
-- Fixed a bug with the destructo bullet and missile interactions.
+- Added an icon
